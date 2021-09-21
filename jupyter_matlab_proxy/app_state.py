@@ -6,6 +6,7 @@ from jupyter_matlab_proxy import mwi_embedded_connector as mwi_connector
 import os
 import json
 import pty
+import sys
 import logging
 from datetime import datetime, timezone, timedelta
 import socket
@@ -460,7 +461,12 @@ class AppState:
                 self.logs["matlab"].append(line)
             await self.handle_matlab_output()
 
-        loop = asyncio.get_running_loop()
+        loop = (
+            asyncio.get_running_loop()
+            if sys.version_info[:2] >= (3, 7)
+            else asyncio.get_event_loop()
+        )
+
         self.tasks["matlab_stderr_reader"] = loop.create_task(matlab_stderr_reader())
 
     async def stop_matlab(self):

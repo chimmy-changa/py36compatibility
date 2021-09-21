@@ -1,10 +1,12 @@
 # Copyright 2020-2021 The MathWorks, Inc.
 
 from json.decoder import JSONDecodeError
-import pytest, os, time, json, stat
+import pytest, os, time, json, stat, sys
 from jupyter_matlab_proxy.util import mwi_custom_http_headers
 from jupyter_matlab_proxy import mwi_environment_variables as mwi_env
-from contextlib import nullcontext as does_not_raise
+
+if sys.version_info[:2] >= (3, 7):
+    from contextlib import nullcontext as does_not_raise
 
 
 def test_get_custom_header_env_var():
@@ -30,7 +32,7 @@ def non_existent_random_json_file_fixture(tmp_path):
     Returns:
         PosixPath: of the non-existent random json file.
     """
-    random_file = tmp_path / f"{str(time.time_ns())}.json"
+    random_file = tmp_path / f'{str(time.time()).replace(".", "")}.json'
     return random_file
 
 
@@ -164,14 +166,12 @@ def test_check_file_validity_no_error(non_existent_temp_json_file, valid_json_co
     with open(random_json_file_with_valid_content, "w") as f:
         f.write(valid_json_content)
 
-    with does_not_raise():
-        assert (
-            mwi_custom_http_headers.__check_file_validity(
-                random_json_file_with_valid_content
-            )
-            is True
-        )
+    if sys.version_info[:2] >= (3, 7):
+        with does_not_raise():
+            assert mwi_custom_http_headers.__check_file_validity(random_json_file_with_valid_content) is True            
 
+    else:
+        assert mwi_custom_http_headers.__check_file_validity(random_json_file_with_valid_content) is True
 
 def test_get_no_env_var():
     """Test to check if get() returns an empty dict, when mwi_custom_http_headers env variable is not present."""
