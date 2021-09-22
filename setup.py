@@ -47,7 +47,7 @@ HERE = Path(__file__).parent.resolve()
 long_description = (HERE / "README.md").read_text()
 
 setuptools.setup(
-    name="jupyter-matlab-proxy",
+    name="dummy36",
     version="0.3.3",
     url="https://github.com/mathworks/jupyter-matlab-proxy",
     author="The MathWorks, Inc.",
