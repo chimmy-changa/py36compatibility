@@ -48,7 +48,7 @@ long_description = (HERE / "README.md").read_text()
 
 setuptools.setup(
     name="dummy36",
-    version="0.3.5",
+    version="0.3.6",
     url="https://github.com/mathworks/jupyter-matlab-proxy",
     author="The MathWorks, Inc.",
     author_email="jupyter-support@mathworks.com",
