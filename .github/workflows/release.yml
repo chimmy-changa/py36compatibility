@@ -65,10 +65,10 @@ jobs:
         with:
           ref: ${{github.sha}}
 
-      - name: Set up Python 3.7
+      - name: Set up Python 3.6
         uses: actions/setup-python@v2
         with:
-          python-version: 3.7
+          python-version: 3.6
 
       - name: Use Node.js 13.x
         uses: actions/setup-node@v2
