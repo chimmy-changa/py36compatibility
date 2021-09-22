@@ -168,10 +168,21 @@ def test_check_file_validity_no_error(non_existent_temp_json_file, valid_json_co
 
     if sys.version_info[:2] >= (3, 7):
         with does_not_raise():
-            assert mwi_custom_http_headers.__check_file_validity(random_json_file_with_valid_content) is True            
+            assert (
+                mwi_custom_http_headers.__check_file_validity(
+                    random_json_file_with_valid_content
+                )
+                is True
+            )
 
     else:
-        assert mwi_custom_http_headers.__check_file_validity(random_json_file_with_valid_content) is True
+        assert (
+            mwi_custom_http_headers.__check_file_validity(
+                random_json_file_with_valid_content
+            )
+            is True
+        )
+
 
 def test_get_no_env_var():
     """Test to check if get() returns an empty dict, when mwi_custom_http_headers env variable is not present."""
