@@ -63,7 +63,7 @@ setuptools.setup(
     install_requires=["jupyter-server-proxy", "aiohttp>=3.7.4"],
     setup_requires=["pytest-runner"],
     tests_require=tests_require,
-    extras_require={"dev": ["aiohttp-devtools"] + tests_require},
+    extras_require={"dev": ["aiohttp-devtools", "black"] + tests_require},
     entry_points={
         "jupyter_serverproxy_servers": ["matlab = jupyter_matlab_proxy:setup_matlab"],
         "console_scripts": ["matlab-jupyter-app = jupyter_matlab_proxy.app:main"],
